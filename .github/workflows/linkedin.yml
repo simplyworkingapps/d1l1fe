@@ -1,0 +1,59 @@
+name: Write a LinkedIn post
+
+on:
+  schedule:
+    # Tue and Thu around 8:15am Portland time (GitHub uses UTC).
+    - cron: "13 15 * * 2,4"
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: "Topic (leave blank for random)"
+        required: false
+        type: choice
+        default: ""
+        options: ["", it_news, security, practical_tip, regulated_it, learning, people_side, portland_tech]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: write-post
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Write the post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FORCE_TOPIC: ${{ inputs.topic }}
+        run: python poster/generate.py --channel linkedin --no-notify
+
+      - name: Save it to the page
+        run: |
+          git config user.name "post-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git diff --cached --quiet || git commit -m "New LinkedIn post"
+          git pull --rebase
+          git push
+
+      - name: Wait for the page to update
+        run: sleep 90
+
+      - name: Ping your phone
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PAGE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+        run: python poster/generate.py --channel linkedin --notify-only

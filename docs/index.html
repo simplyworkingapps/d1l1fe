@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f6f3ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16181b" media="(prefers-color-scheme: dark)">
+<title>Post Queue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f3ee; --card: #ffffff; --ink: #1d1f22; --muted: #6b6f76;
+    --line: #e5e0d8; --accent: #1f6feb; --accent-ink: #ffffff;
+    --ig: #c13584; --ig-ink: #ffffff; --li: #0a66c2; --li-ink: #ffffff;
+    --done: #2f855a; --chip: #efeae2; --seg: #efeae2; --seg-on: #ffffff;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181b; --card: #1f2226; --ink: #eceef0; --muted: #9aa0a8;
+      --line: #2e3238; --accent: #4c8dff; --accent-ink: #0b0d10;
+      --ig: #e1559f; --ig-ink: #120a0f; --li: #5aa2ec; --li-ink: #07111c;
+      --done: #5cc18b; --chip: #2a2e33; --seg: #2a2e33; --seg-on: #3a3f46; --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181b; --card: #1f2226; --ink: #eceef0; --muted: #9aa0a8;
+    --line: #2e3238; --accent: #4c8dff; --accent-ink: #0b0d10;
+    --ig: #e1559f; --ig-ink: #120a0f; --li: #5aa2ec; --li-ink: #07111c;
+    --done: #5cc18b; --chip: #2a2e33; --seg: #2a2e33; --seg-on: #3a3f46; --shadow: none;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.5 Inter, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 560px; margin: 0 auto; padding: 28px 16px 64px; }
+  header h1 { font: 500 1.6rem/1.2 Fraunces, Georgia, serif; margin: 0 0 4px; }
+  header p { margin: 0 0 20px; color: var(--muted); font-size: .92rem; }
+
+  .seg { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--seg); border-radius: 12px; padding: 4px; margin-bottom: 16px; }
+  .seg button { border: 0; min-height: 44px; padding: 8px; border-radius: 9px; background: transparent; color: var(--muted); font-weight: 600; }
+  .seg button[aria-pressed="true"] { background: var(--seg-on); color: var(--ink); box-shadow: var(--shadow); }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; }
+  .chip { background: var(--chip); border-radius: 999px; padding: 2px 10px; font-size: .78rem; font-weight: 500; }
+  .date { color: var(--muted); font-size: .82rem; }
+  .posted-badge { color: var(--done); font-size: .82rem; font-weight: 600; margin-left: auto; }
+  .text { font-size: 1.1rem; line-height: 1.55; white-space: pre-wrap; margin: 0 0 12px; overflow-wrap: anywhere; }
+  .link { display: block; font-size: .85rem; color: var(--accent); overflow-wrap: anywhere; margin-bottom: 16px; }
+  .why { color: var(--muted); font-size: .85rem; margin: 0 0 16px; }
+  .pic { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; margin-bottom: 14px; background: var(--chip); }
+  .hint { color: var(--muted); font-size: .82rem; margin: 10px 0 0; text-align: center; }
+
+  .actions { display: grid; gap: 10px; }
+  button, .btn {
+    font: inherit; font-weight: 600; border-radius: 12px; padding: 14px 16px; min-height: 48px;
+    border: 1px solid var(--line); background: transparent; color: var(--ink); cursor: pointer;
+    text-align: center; text-decoration: none; display: block; width: 100%;
+  }
+  .primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-size: 1.02rem; }
+  .primary.ig { background: var(--ig); border-color: var(--ig); color: var(--ig-ink); }
+  .primary.li { background: var(--li); border-color: var(--li); color: var(--li-ink); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  button:focus-visible, .btn:focus-visible, .item:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 36px 0 12px; font-weight: 600; }
+  .older { display: grid; gap: 10px; }
+  .item {
+    display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; text-align: left;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px; min-height: 0; font-weight: 400;
+  }
+  .thumb { width: 56px; height: 70px; border-radius: 8px; object-fit: cover; background: var(--chip); }
+  .thumb.blank { display: grid; place-items: center; color: var(--muted); font-size: .75rem; }
+  .item-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: .95rem; }
+  .item-meta { display: flex; gap: 10px; font-size: .78rem; color: var(--muted); margin-top: 2px; }
+  .ok { color: var(--done); font-weight: 600; }
+
+  .empty { text-align: center; color: var(--muted); padding: 48px 16px; }
+  .toast {
+    position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 12px; font-weight: 500;
+    opacity: 0; transition: .2s; pointer-events: none; max-width: calc(100% - 32px); text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Post queue</h1>
+    <p id="intro">Tap the big button, then paste into a new post.</p>
+  </header>
+  <div class="seg" role="group" aria-label="Platform">
+    <button type="button" data-platform="fb">Facebook</button>
+    <button type="button" data-platform="ig">Instagram</button>
+    <button type="button" data-platform="li">LinkedIn</button>
+  </div>
+  <section id="latest" aria-live="polite"></section>
+  <h2 id="older-heading" hidden>Earlier posts</h2>
+  <section class="older" id="older" aria-labelledby="older-heading"></section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const TOPIC_LABELS = {
+  portland_events: "Portland event", portland_local: "Portland", chicago_local: "Chicago",
+  cats: "Cats", clothing: "Style", wellness: "Wellness",
+  it_news: "IT news", security: "Security", practical_tip: "Tip", learning: "Learning",
+  people_side: "People in IT", portland_tech: "Portland tech", regulated_it: "Regulated IT"
+};
+const PLATFORM = { fb: "Facebook", ig: "Instagram", li: "LinkedIn" };
+const channelOf = p => p.channel || "social";
+const platformsFor = p => channelOf(p) === "linkedin" ? ["li"] : (hasIG(p) ? ["fb", "ig"] : ["fb"]);
+
+// What you've marked as posted (and your last tab) is remembered on this device only.
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+// Older versions stored plain ids for Facebook; carry those over.
+let posted = new Set(store.get("posted", []).map(k => k.includes(":") ? k : k + ":fb"));
+let platform = store.get("platform", "fb");
+let POSTS = [];
+
+const isPosted = (p, pf) => posted.has(`${p.id}:${pf}`);
+const hasIG = p => !!(p.instagram && p.image);
+const fbText = p => p.link ? `${p.text}\n\n${p.link}` : p.text;
+
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast.timer); toast.timer = setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch {
+    const ta = Object.assign(document.createElement("textarea"), { value: text });
+    ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand("copy"); ta.remove(); return ok;
+  }
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return isNaN(d) ? "" : d.toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric" });
+}
+
+function el(tag, attrs = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v);
+  }
+  for (const k of kids) if (k != null) n.append(k);
+  return n;
+}
+
+// Start fetching the image as soon as the card shows, so sharing feels instant.
+const imageCache = {};
+function imageFile(p) {
+  if (!imageCache[p.id]) {
+    imageCache[p.id] = fetch(p.image).then(r => { if (!r.ok) throw 0; return r.blob(); })
+      .then(b => new File([b], `post-${p.id}.jpg`, { type: "image/jpeg" }));
+    imageCache[p.id].catch(() => delete imageCache[p.id]);
+  }
+  return imageCache[p.id];
+}
+
+function saveImage(p) {
+  const a = el("a", { href: p.image, download: `post-${p.id}.jpg` });
+  document.body.append(a); a.click(); a.remove();
+}
+
+async function shareToInstagram(p) {
+  const copied = await copy(p.instagram);
+  let file = null;
+  try { file = await imageFile(p); } catch {}
+  if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+      toast(copied ? "Pick Instagram, then paste the caption." : "Pick Instagram. Caption didn't copy, use Copy caption.");
+      return;
+    } catch (e) {
+      if (e && e.name === "AbortError") return; // they closed the share sheet
+    }
+  }
+  // Sharing isn't available (usually a computer): save the picture instead.
+  saveImage(p);
+  toast(copied ? "Caption copied and picture saved. Add both in Instagram." : "Picture saved. Use Copy caption next.");
+}
+
+function togglePosted(p, pf) {
+  const key = `${p.id}:${pf}`;
+  posted.has(key) ? posted.delete(key) : posted.add(key);
+  store.set("posted", [...posted]); render();
+}
+
+function leadCard(p) {
+  const pf = platformsFor(p).includes(platform) ? platform : platformsFor(p)[0];
+  const done = isPosted(p, pf);
+  const c = el("article", { class: "card", id: p.id });
+  c.append(el("div", { class: "meta" },
+    el("span", { class: "chip" }, TOPIC_LABELS[p.topic] || p.topic),
+    el("span", { class: "date" }, fmtDate(p.created)),
+    done ? el("span", { class: "posted-badge" }, `✓ Posted to ${PLATFORM[pf]}`) : null));
+
+  const mark = el("button", { type: "button", onclick: () => togglePosted(p, pf) }, done ? "Unmark" : "Mark posted");
+
+  if (pf === "ig") {
+    imageFile(p).catch(() => {});
+    c.append(el("img", { class: "pic", src: p.image, alt: `Post image: ${p.card || ""}`, width: "1080", height: "1350" }));
+    c.append(el("p", { class: "text" }, p.instagram));
+    c.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "primary ig", onclick: () => shareToInstagram(p) }, "Share to Instagram"),
+      el("div", { class: "row" },
+        el("button", { type: "button", onclick: async () => toast(await copy(p.instagram) ? "Caption copied." : "Couldn't copy.") }, "Copy caption"),
+        mark),
+      el("button", { type: "button", onclick: () => saveImage(p) }, "Save picture")));
+    c.append(el("p", { class: "hint" }, "The caption is copied for you. Paste it when Instagram asks for one."));
+  } else if (pf === "li") {
+    c.append(el("p", { class: "text" }, p.text));
+    if (p.link) c.append(el("a", { class: "link", href: p.link, target: "_blank", rel: "noopener" }, p.link));
+    if (p.why) c.append(el("p", { class: "why" }, p.why));
+    c.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "primary li", onclick: async () => {
+        const ok = await copy(fbText(p));
+        toast(ok ? "Copied. Paste it into the new post." : "Couldn't copy. Long-press the text instead.");
+        if (ok) setTimeout(() => { location.href = "https://www.linkedin.com/feed/?shareActive=true"; }, 700);
+      }}, "Copy & open LinkedIn"),
+      el("div", { class: "row" },
+        el("button", { type: "button", onclick: async () => toast(await copy(fbText(p)) ? "Copied." : "Couldn't copy.") }, "Copy only"),
+        mark)));
+    c.append(el("p", { class: "hint" }, "Give it a quick read first. It's your professional voice."));
+  } else {
+    c.append(el("p", { class: "text" }, p.text));
+    if (p.link) c.append(el("a", { class: "link", href: p.link, target: "_blank", rel: "noopener" }, p.link));
+    if (p.why) c.append(el("p", { class: "why" }, p.why));
+    c.append(el("div", { class: "actions" },
+      el("button", { type: "button", class: "primary", onclick: async () => {
+        const ok = await copy(fbText(p));
+        toast(ok ? "Copied. Paste it into a new post." : "Couldn't copy. Long-press the text instead.");
+        if (ok) setTimeout(() => { location.href = "https://www.facebook.com/"; }, 700);
+      }}, "Copy & open Facebook"),
+      el("div", { class: "row" },
+        el("button", { type: "button", onclick: async () => toast(await copy(fbText(p)) ? "Copied." : "Couldn't copy.") }, "Copy only"),
+        mark)));
+  }
+  return c;
+}
+
+function listItem(p) {
+  const status = pf => isPosted(p, pf) ? el("span", { class: "ok" }, `${PLATFORM[pf]} ✓`) : null;
+  return el("button", { type: "button", class: "item", onclick: () => { location.hash = p.id; scrollTo({ top: 0 }); } },
+    hasIG(p) ? el("img", { class: "thumb", src: p.image, alt: "", loading: "lazy" }) : el("span", { class: "thumb blank" }, channelOf(p) === "linkedin" ? "in" : "Text"),
+    el("span", {},
+      el("span", { class: "item-text" }, p.text),
+      el("span", { class: "item-meta" },
+        el("span", {}, `${TOPIC_LABELS[p.topic] || p.topic} · ${fmtDate(p.created)}`),
+        ...platformsFor(p).map(status))));
+}
+
+function render() {
+  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.platform === platform)));
+  const latest = document.getElementById("latest"), older = document.getElementById("older");
+  latest.replaceChildren(); older.replaceChildren();
+  // A notification link to a post in the other stream switches tabs to match it.
+  const hash = location.hash.slice(1);
+  const target = POSTS.find(p => p.id === hash);
+  if (target && !platformsFor(target).includes(platform)) {
+    platform = platformsFor(target)[0];
+    document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.platform === platform)));
+  }
+  const wanted = platform === "li" ? "linkedin" : "social";
+  const list = POSTS.filter(p => channelOf(p) === wanted && (platform !== "ig" || hasIG(p)));
+  if (!list.length) {
+    document.getElementById("older-heading").hidden = true;
+    latest.append(el("div", { class: "empty" }, platform === "li"
+      ? "No LinkedIn posts yet. The first one arrives Tuesday or Thursday morning."
+      : "No posts yet. The first one will show up after the next scheduled run."));
+    return;
+  }
+  // Feature the post the notification pointed to, else the newest one not yet shared here.
+  const lead = (target && list.includes(target) ? target : null) || list.find(p => !isPosted(p, platform)) || list[0];
+  latest.append(leadCard(lead));
+  const rest = list.filter(p => p !== lead);
+  document.getElementById("older-heading").hidden = !rest.length;
+  rest.forEach(p => older.append(listItem(p)));
+}
+
+document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+  platform = b.dataset.platform; store.set("platform", platform);
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  render();
+}));
+addEventListener("hashchange", render);
+
+fetch("posts.json?ts=" + Date.now(), { cache: "no-store" })
+  .then(r => r.ok ? r.json() : [])
+  .catch(() => [])
+  .then(data => { POSTS = Array.isArray(data) ? data : []; render(); });
+</script>
+</body>
+</html>
