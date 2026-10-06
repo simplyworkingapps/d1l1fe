@@ -1,5 +1,14 @@
 [
   {
+    "id": "88dd1210",
+    "channel": "linkedin",
+    "created": "2026-10-06T13:15-07:00",
+    "topic": "it_news",
+    "text": "Microsoft 365 admins had a small hiccup overnight. For a few hours, admins intermittently couldn't get into the Microsoft 365 admin center. I'm going by Microsoft's service health notes, which the University of Pennsylvania's IT team posts publicly.\n\nAs those notes describe it, Microsoft rolled its infrastructure back to a previous build and changed how the API responds to ease a surge of requests. They also turned off a recently introduced service change. The incident is marked restored.\n\nIt was short and I'm sure it was stressful for the people watching it. What stuck with me is how ordinary the fix was: undo the latest change, then figure out the rest. In my experience, that's good advice for any size of environment.\n\nI'm still working on a related habit. When the admin portal won't load, do I know my second way in, and is it written down where a tired teammate can find it at 2 a.m.?\n\nHope your on-call week is going okay. How do you handle a plan B?\n\n#Microsoft365 #ITOperations #SysAdmin",
+    "link": "https://mailservices.isc.upenn.edu/computing/email/penno365/alerts/ms-incidents.html",
+    "why": "Short Oct 5-6, 2026 Microsoft 365 admin center access incident, resolved by rollback, with a takeaway about having a documented plan B."
+  },
+  {
     "id": "b1b0154d",
     "channel": "social",
     "created": "2026-10-05T15:55-07:00",
