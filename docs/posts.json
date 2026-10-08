@@ -1,5 +1,14 @@
 [
   {
+    "id": "3358317b",
+    "channel": "linkedin",
+    "created": "2026-10-08T13:41-07:00",
+    "topic": "people_side",
+    "text": "A quick thank-you to anyone who has ever worked a help desk queue.\n\nIn my experience with Microsoft 365 rollouts and identity and access work, the people answering the phone are usually the first to hear that something is wrong, and often the last to get credit when it's fixed. They also tend to talk to folks on their most stressful day, whether it's a locked account, a missing file, or a meeting that starts in two minutes.\n\nA few things I'm still practicing myself:\n\n- Assume the person on the other end is busy, not careless.\n- Say \"that sounds frustrating\" before saying \"try this.\"\n- During an outage, a short, honest update is kinder than silence.\n- When someone new asks a question, remember you once asked the same one.\n\nIf you're deep in an on-call week right now, I hope you get some real rest soon. It's okay not to have every answer.\n\nWhat's one small thing a teammate did that made a hard day easier for you?\n\n#ITSupport #HelpDesk #Mentorship",
+    "link": "",
+    "why": "A gentle thank-you to help desk teams with simple tips on patience, outage kindness, and mentoring newcomers."
+  },
+  {
     "id": "a31a7814",
     "channel": "social",
     "created": "2026-10-07T14:36-07:00",
