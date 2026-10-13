@@ -1,5 +1,14 @@
 [
   {
+    "id": "9ca8807a",
+    "channel": "linkedin",
+    "created": "2026-10-13T13:39-07:00",
+    "topic": "learning",
+    "text": "Lately I've been brushing up on how conditional access works, and I'm realizing how much there still is to learn about it.\n\nIn my experience with identity and access management, it's easy to learn a setting by memorizing where the checkbox lives. It's harder to understand why a rule exists and what a user actually experiences when it triggers. I'm trying to slow down and think through the sign-in from the user's side before I think about the policy.\n\nA few free things I've found useful for this kind of practice: the official Microsoft Learn modules, vendor-neutral Security+ study material, and just sketching a sign-in flow on paper. It's a little humbling how often my first sketch has a gap in it.\n\nIt's also okay to not have all of this figured out. Everyone was new at this once, and the tools keep changing, so most of us are learning on the move between tickets and busy weeks.\n\nWhat has helped you understand identity concepts better? I'd love to hear about any resources, habits, or people who made it click for you.\n\n#IdentityAndAccessManagement #Microsoft365 #ContinuousLearning",
+    "link": "",
+    "why": "Sharing that he's brushing up on conditional access and identity concepts, and asking others what resources helped them."
+  },
+  {
     "id": "4948514e",
     "channel": "social",
     "created": "2026-10-12T16:14-07:00",
