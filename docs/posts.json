@@ -1,5 +1,14 @@
 [
   {
+    "id": "4a0ac96b",
+    "channel": "linkedin",
+    "created": "2026-10-15T12:06-07:00",
+    "topic": "it_news",
+    "text": "A rough Tuesday for some Microsoft 365 admins in Europe. According to The Register, some customers who reach Outlook, OneDrive, SharePoint Online, Teams and Windows 365 Cloud PCs through Global Secure Access had trouble connecting on October 13. Microsoft's status update said part of the GSA infrastructure was performing below acceptable thresholds. The Register also noted it wasn't yet clear what caused it. I'm going by their reporting and Microsoft's updates, so please check the source for details.\n\nThe part that stuck with me is that the apps themselves may have been fine for people who weren't on that path. In my experience with Microsoft 365 and identity work, that kind of uneven impact makes the first hour of troubleshooting confusing. One person is stuck, and the person next to them is fine.\n\nI'm still learning here. Next time, I might ask earlier how the affected users connect, not only which app is failing.\n\nTo anyone who spent that day fielding tickets or waiting on a status page, I hope things are calmer now. Anyone else have a favorite first question when only some users are affected?\n\n#Microsoft365 #ITOperations #SystemsAdministration",
+    "link": "https://www.theregister.com/saas/2026/10/13/microsoft-celebrates-end-of-office-2021-ltsc-with-ms-365-outage/5302848",
+    "why": "Oct 13, 2026 Microsoft 365 outage affecting some European users on Global Secure Access, with a humble troubleshooting takeaway."
+  },
+  {
     "id": "ff76a65a",
     "channel": "social",
     "created": "2026-10-14T13:20-07:00",
