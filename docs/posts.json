@@ -1,5 +1,14 @@
 [
   {
+    "id": "3d329e30",
+    "channel": "linkedin",
+    "created": "2026-10-20T12:11-07:00",
+    "topic": "security",
+    "text": "A phishing campaign making the rounds is a good reminder that scam pages don't always look sloppy anymore.\n\nAccording to a KnowBe4 newsletter summarizing a report from Island, the campaign targets employees who manage advertising accounts. It poses as a set of AI advertising tools, borrowing the branding of well-known AI products. The report says it also uses fake CAPTCHA screens, and the people running it can watch what victims type as they type it.\n\nTwo small habits I find useful:\n\n1. If a message offers a new tool or an urgent account task, skip the link. Open the service from a bookmark or type the address yourself.\n\n2. If something feels off, report it, even if you already clicked. In my experience with identity and access work, a quick heads-up early is much easier on everyone than a quiet worry later.\n\nBusy weeks make these easy to miss, and that's okay. Still learning here too. What's worked for your team?\n\n#CyberSecurity #Phishing #ITSupport",
+    "link": "https://blog.knowbe4.com/cyberheistnews-vol-16-42-warning-phishing-attacks-are-using-ai-themed-ad-lures",
+    "why": "Plain-language take on a phishing campaign using fake AI advertising tool portals, with two simple habits."
+  },
+  {
     "id": "5adbb8f7",
     "channel": "social",
     "created": "2026-10-19T14:15-07:00",
