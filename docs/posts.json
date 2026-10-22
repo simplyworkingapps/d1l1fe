@@ -1,5 +1,14 @@
 [
   {
+    "id": "a2d513e2",
+    "channel": "linkedin",
+    "created": "2026-10-22T12:12-07:00",
+    "topic": "practical_tip",
+    "text": "Something I've found helpful when planning a change for users, whether it's an Intune rollout, an MFA change, or a Teams and SharePoint move: write the user message before the technical plan is finished.\n\nIn my experience with Microsoft 365 rollouts, trying to explain a change in plain words shows me what I haven't thought through yet. If I can't say what's changing, when, what the person needs to do, and who to ask for help, the plan probably has gaps.\n\nIt also helps the help desk. They're the ones fielding questions, and a clear heads-up gives them something solid to point to instead of guessing.\n\nPeople are busy and often tired, and a surprise prompt on a Monday morning is nobody's favorite. A short, kind message goes a long way.\n\nI'm still learning how to make these notes shorter and clearer. What's worked for you when announcing a change?\n\n#ITSupport #Microsoft365 #ChangeManagement",
+    "link": "",
+    "why": "A practical tip about drafting the user-facing message early when planning IT changes like M365, Intune, or MFA rollouts."
+  },
+  {
     "id": "5c2ebf05",
     "channel": "social",
     "created": "2026-10-21T13:22-07:00",
