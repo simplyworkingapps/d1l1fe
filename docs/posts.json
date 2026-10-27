@@ -1,5 +1,14 @@
 [
   {
+    "id": "75224163",
+    "channel": "linkedin",
+    "created": "2026-10-27T13:02-07:00",
+    "topic": "regulated_it",
+    "text": "A vendor-related data incident is a good reminder that our own systems are only part of the picture.\n\nAccording to the HIPAA Journal, Denver Health Medical Plan has notified more than 238,000 individuals about a data incident tied to a vendor. I only know what that headline says, so I won't guess at details. Incidents like this are stressful for everyone involved, including the IT and compliance folks who end up fielding the questions.\n\nIn my experience in healthcare and financial services, one habit helps: keep a plain, current list of the outside vendors that can touch sensitive data, and who on your side owns each relationship. It's not glamorous, and it goes stale quickly when people are busy. But when a question comes up, a short list beats starting from scratch.\n\nThis is general information, not legal advice. If you've found a simple way to keep vendor lists fresh, I'd like to hear it.\n\n#HIPAA #ITSecurity #Healthcare",
+    "link": "https://www.hipaajournal.com/",
+    "why": "Vendor-related breach at Denver Health Medical Plan (via HIPAA Journal) and a practical tip on tracking vendors that touch sensitive data."
+  },
+  {
     "id": "16fff29b",
     "channel": "social",
     "created": "2026-10-26T14:12-07:00",
