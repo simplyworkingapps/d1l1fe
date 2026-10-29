@@ -1,5 +1,14 @@
 [
   {
+    "id": "f60d056a",
+    "channel": "linkedin",
+    "created": "2026-10-29T13:15-07:00",
+    "topic": "people_side",
+    "text": "Something I've been thinking about: the kindest thing during an outage might be how we talk to each other while it's happening.\n\nIn my experience with Microsoft 365 and identity work, an outage is stressful for everyone. Users can't get to what they need, the help desk is getting pinged from every direction, and whoever is on call is trying to think clearly while tired. Nobody in that chain is having a great day.\n\nA few small things I try to remember:\n\nA short, honest update (\"we know, we're looking, next check-in at this time\") helps more than silence.\n\nThe person asking \"is it fixed yet?\" is usually just trying to get their own work done.\n\nAnd it's okay to hand off, step away, and eat something. Burnout tends to sneak up on the people who keep saying \"I'm fine.\"\n\nI'm still learning how to do this well, and I'd love to hear what has helped you or your team get through a rough on-call week.\n\n#ITLife #HelpDesk #Teamwork",
+    "link": "",
+    "why": "A gentle reflection on kindness, clear communication, and rest during outages and on-call weeks."
+  },
+  {
     "id": "12d2239a",
     "channel": "social",
     "created": "2026-10-28T14:21-07:00",
